@@ -37,14 +37,14 @@ function establish_connection ( ) {
         $host = $model->sanitizeString ( filter_input ( INPUT_GET, 'host' ) );
 //        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
         
-        if ( $object->connection ( $host ) ) {
-            if ( $object->login ( $username, $password ) ) {
+        if ( $object->connection ( $host, $username, $password ) ) {
+//            if ( $object->login ( $username, $password ) ) {
                 sessions ( $host, $username, $password );
                 echo '{"result":1, "message":"Connected to server"}';                
             } else {
                 echo '{"result":0, "message":"Failed to connect to server"}';
             }
-        }
+//        }
     } else {
         echo '{"result":0, "message":"Variables not set"}';
     }
