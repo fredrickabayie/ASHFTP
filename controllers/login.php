@@ -22,31 +22,43 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
     }
 }
 
+
+/*
+ * Function to control connection to server
+ */
 function establish_connection ( ) {    
     if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
             filter_input ( INPUT_GET, 'host' ) ) {
-        
         require_once '../models/ftp.php';
-        
         $object = new ftp ( );
         $model = new model ( );
         $username = $model->sanitizeString ( filter_input ( INPUT_GET, 'username' ) );
         $password = $model->sanitizeString ( filter_input ( INPUT_GET, 'password' ) );
         $host = $model->sanitizeString ( filter_input ( INPUT_GET, 'host' ) );
-        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
+//        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
         
         if ( $object->connection ( $host ) ) {
             if ( $object->login ( $username, $password ) ) {
+                sessions ( $host, $username, $password );
                 echo '{"result":1, "message":"Connected to server"}';                
-            }
-            else {
+            } else {
                 echo '{"result":0, "message":"Failed to connect to server"}';
             }
         }
-       
-        
-    }
-    else {
+    } else {
         echo '{"result":0, "message":"Variables not set"}';
     }
+}//end of establish_connection()
+
+
+/*
+ * Function to store session variables
+ */
+function sessions ( $host, $username, $password ) {
+    session_id ( "login" );
+    session_start ( );
+    
+    $_SESSION ['host'] = $host;
+    $_SESSION ['username'] = $username;
+    $_SESSION ['password'] = $password;
 }

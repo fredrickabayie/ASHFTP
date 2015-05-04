@@ -17,6 +17,8 @@ class ftp
     var $link;
     /* query result resource*/
     var $result;
+    
+    var $folder;
 
     
     /*
@@ -24,8 +26,9 @@ class ftp
      */
     function ftp ( )
     {
-        $this->link=false;
+        $this->link = false;
         $this->result = false;
+        $this->folder = false;
     }   
     
     
@@ -51,6 +54,15 @@ class ftp
         }
         return true;
     }  
+    
+    
+    function folders ( ) {
+        $this->folder = ftp_nlist ( $this->link, "." );
+        if ( !$this->folder ) {
+            return false;
+        }
+        return true;
+    }
 
     
     /**
