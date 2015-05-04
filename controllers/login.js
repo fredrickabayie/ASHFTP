@@ -26,14 +26,18 @@ function makeRequest ( username, password, host, port ) {
     var url = "";
     var object = "";
     
-    url = "../controllers/php/login.php?cmd=1&username="+username+
+    url = "../controllers/login.php?cmd=1&username="+username+
             "&password="+password+"&host="+host+"&port="+port;
     object = syncAjax ( url );
     
     if ( object.result === 1 ) {
+        window.location.replace( "../views/dashboard.html" );
+        $("#result").text ( "Connected" );
         console.log ( "Connectd" );
     }
+    else {
     console.log ( "Not connected" );
+    }
 }//end of makeRequest()
 
 
@@ -52,8 +56,23 @@ function syncAjax ( url ) {
 $ (function ( ) {
     $ ( "#connect" ).click ( function ( ev ) {
         ev.preventDefault ( );
+        getValues ( );
         console.log ( "Connect Clicked" );
-        var username = $ ( "#username" ).val( );
-        console.log ( getValues( ) );
+//        var username = $ ( "#username" ).val( );
+//        console.log ( getValues( ) );
     });
 });
+
+
+//$(document).ready(function(){
+////    $('#modal1').openModal();
+//    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+//    $('#modal1').openModal( {
+//    dismissible: false, // Modal can be dismissed by clicking outside of the modal
+//      opacity: .2, // Opacity of modal background
+//      in_duration: 300, // Transition in duration
+//      out_duration: 200, // Transition out duration
+////      ready: function() { alert('Ready'); }, // Callback for Modal open
+////      complete: function() { alert('Closed'); } // Callback for Modal close
+//  });
+//  });
