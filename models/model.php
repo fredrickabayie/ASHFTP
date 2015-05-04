@@ -1,8 +1,24 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * author:
+ * date:
+ * description: A root class for all manage classes. This class communicates with DB
  */
 
+class model
+{
+    
+    /*
+    * Function to sanitize command sent
+    */
+   function sanitizeString ( $val )
+   {
+       $val = stripslashes ( $val );
+       $val = strip_tags ( $val );
+       $val = htmlentities ( $val );
+       return $val;
+   }//end of sanitizeString()
+   
+
+}
