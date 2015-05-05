@@ -16,6 +16,10 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
         case 1:
             load_folders ( );
             break;
+        
+        case 2:
+            change_directory ( );
+            break;
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -40,10 +44,43 @@ function load_folders ( ) {
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];
         $ftp_login = ftp_login($ftp_server, $username, $password);
-         $folder = ftp_nlist ( $ftp_server, "." );
+        
+        $folder = ftp_nlist ( $ftp_server, "." );
+//            $items = array ();
+            
         $result =  '{"result":1, "folders": [';
         $i=0;
-        foreach ( $folder as $x => $val ) {
+        foreach ( $folder as $val ) {
+            if ( $i != 0 ) {
+                $result .= ',';
+            }
+            
+            $result .= '{"folder_name":"'.$val.'"}';
+            $i++;
+        }
+        $result .= ']}';
+//        echo $result;
+//     }
+    }
+}
+
+
+
+function change_directory ( ) {
+    if ( isset($_REQUEST['directory'])) {
+        $result = '';
+         session_start ( );
+            $host = $_SESSION['host'];
+            $dir = $_REQUEST['directory'];
+        $ftp_server = ftp_connect($host);
+        $username = $_SESSION['username'];
+        $password = $_SESSION['password'];
+        $ftp_login = ftp_login($ftp_server, $username, $password);
+        ftp_chdir ($ftp_server, $dir); 
+        $dirL = ftp_nlist($ftp_server, ".");
+         $result =  '{"result":1, "folders": [';
+        $i=0;
+        foreach ( $dirL as $x => $val ) {
             if ( $i != 0 ) {
                 $result .= ',';
             }
@@ -51,6 +88,6 @@ function load_folders ( ) {
             $i++;
         }
         $result .= ']}';
-        echo $result;
+//        echo $result;
     }
 }

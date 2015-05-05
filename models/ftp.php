@@ -9,82 +9,57 @@
 /*
  * Ftp class
  */
-class ftp
-{
-    /*
-     * Initializing instance variables
-     */
-    var $link;
-    /* query result resource*/
-    var $result;
-    
-    var $folder;
-
-    
+class ftp {
     /*
      * Constructor
      */
     function ftp ( ) {
-        $this->link = false;
+        $this->conn = false;
         $this->result = false;
-        $this->folder = false;
-    }   
-    
+    }
+
     
     /*
      * Function to connect to server
      */
-    function connection ( $ftp_server ) {     
-        if ( $this->link ) {
-            return true;
+    function connect ( $ftp_server ) {
+        $this->conn = ftp_connect ( $ftp_server );
+        if ( $this->conn ) {
+            return $this->conn;
         }
-        $this->link = ftp_connect ( $ftp_server );
-        if ( !$this->link ) {
-            return false;
-        }
-        return true;
+        return null;
     }
     
-    
+
     /*
      * Function to login
      */
     function login ( $ftp_username, $ftp_password ) {
-        if ( $this->link ) {
-            return true;
+//        $connect = get_connection ();
+        $this->result = ftp_login ( $this->conn , $ftp_username, $ftp_password );
+        if ( $this->result === false ) {
+            echo 'Failed to login';
         }
-        $this->result = ftp_login ( $this->link, $ftp_username, $ftp_password );
-        if ( !$this->result ) {
-            return false;
-        }
-        return true;
+        return $this->result;
     }
     
     
-    function folders ( ) {
-//        session_start();
-        $host = $_SESSION['host'];
-        $ftp_server = ftp_connect($host);
-        $username = $_SESSION['username'];
-        $password = $_SESSION['password'];
-        $ftp_login = ftp_login($ftp_server, $username, $password);
-        if ( $this->link ) {
-            return true;
-        }
-        $folder = ftp_nlist ( $ftp_server, "." );
-        
-        if ( !$this->folder ) {
-            return false;
-        }
-        return print_r ( $folder );
-    }
-
-    
-    /**
-     * Function to close the ftp conection
-     */
-//    function close_connection ( ) {
-//        return ftp_close ( $this->link );
+//    function folders ( $directory = '.' ) {
+//        
+//       if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
+//            $items = array(); 
+//
+//            foreach ($children as $child) { 
+//                $chunks = preg_split("/\s+/", $child); 
+//                list($item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
+//                        $item['month'], $item['day'], $item['time']) = $chunks; 
+//                $item['type'] = $chunks[0]{0} === 'd' ? 'directory' : 'file'; 
+//                array_splice($chunks, 0, 8); 
+//                $items[implode(" ", $chunks)] = $item; 
+//            } 
+//
+//            return $items; 
+//        }
 //    }
-
+    
 }

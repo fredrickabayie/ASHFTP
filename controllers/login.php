@@ -26,7 +26,7 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 /*
  * Function to control connection to server
  */
-function establish_connection ( ) {    
+function establish_connection ( ) {
     if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
             filter_input ( INPUT_GET, 'host' ) ) {
         require_once '../models/ftp.php';
@@ -37,14 +37,14 @@ function establish_connection ( ) {
         $host = $model->sanitizeString ( filter_input ( INPUT_GET, 'host' ) );
 //        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
         
-        if ( $object->connection ( $host, $username, $password ) ) {
-//            if ( $object->login ( $username, $password ) ) {
+        if ( $object->connect ( $host ) ) {
+            if ( $object->login ( $username, $password ) ) {
                 sessions ( $host, $username, $password );
                 echo '{"result":1, "message":"Connected to server"}';                
             } else {
                 echo '{"result":0, "message":"Failed to connect to server"}';
             }
-//        }
+        }
     } else {
         echo '{"result":0, "message":"Variables not set"}';
     }
@@ -56,7 +56,7 @@ function establish_connection ( ) {
  */
 function sessions ( $host, $username, $password ) {
     session_id ( "login" );
-    session_start ( );
+//    session_start ( );
     
     $_SESSION ['host'] = $host;
     $_SESSION ['username'] = $username;
