@@ -56,11 +56,25 @@ $ftp = new model ( );
 //$ftp->_construct();
 $dir = ".";
 $fol = $ftp->change($dir);
-print_r($fol);
-$i = 1;
+$name = $ftp->getFolderNames($dir);
+//var_dump($name);
+
+//$folength = count($fol);
+//print_r($fol);
+//$i = 1;
+
+// foreach ( $name as $n ) {
 foreach ( $fol as $key => $val ) {
-    print_r ("Name ".$val);
+   
+    print_r (" Name ".$fol[$key]['name']. " Rights ".$fol[$key]['rights']);
 }
+    
+//}
+
+//for ( $i = 0; $i < $folength; $i++ ) {
+//    print_r(array($i,$fol['name']));
+//}
+
 //var_dump($fol[$i].name);
 //echo $fol;
 

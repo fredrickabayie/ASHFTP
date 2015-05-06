@@ -42,6 +42,17 @@ class ftp {
     }
     
     
+    function getFolderNames ( $directory ) {
+        if ( is_array ( $children = ftp_nlist ( $this->conn, $directory ) ) ) {
+            $items = array ( );
+            foreach ( $children as $key => $child ) {
+                $items[$key] = $child;
+            }
+            return $items;
+        }
+    }
+    
+    
     function folders ( $directory ) {
         
        if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
@@ -51,8 +62,8 @@ class ftp {
                 
                 $chunks = preg_split ( "/\s+/", $child ); 
                 
-                list($item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
-                        $item['month'], $item['day'], $item['time'], $item['name']) = $chunks; 
+                list ( $item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
+                        $item['month'], $item['day'], $item['time'], $item['name'] ) = $chunks; 
                 
                 $item['type'] = $chunks[0]{0} === 'd' ? 'directory' : 'file'; 
                 array_splice($chunks, 0, 8); 
