@@ -7,7 +7,9 @@
  */
 require_once 'ftp.php';
 
-
+/*
+ * Class model and extends the ftp class
+ */
 class model extends ftp
 {
     
@@ -22,41 +24,48 @@ class model extends ftp
 //       return $val;
 //   }//end of sanitizeString()
     
-//    function model ( ) {
-//        echo "constructor";
-//        return $this->get_connection();
-//    }
-    
-    public function connection ( ) {
-        
-        return $this->connect($ftp_server);
+    /*
+     * Constructor for the class
+     */
+    function __construct ( ) {
+        return $this->connect ( );
     }
     
     
-       public function folders ( $directory = '.' ) {
-        
-       if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
-            $items = array(); 
-
-            foreach ($children as $child) { 
-                $chunks = preg_split("/\s+/", $child); 
-                list($item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
-                        $item['month'], $item['day'], $item['time']) = $chunks; 
-                $item['type'] = $chunks[0]{0} === 'd' ? 'directory' : 'file'; 
-                array_splice($chunks, 0, 8); 
-                $items[implode(" ", $chunks)] = $item; 
-            } 
-
-            return $items; 
-        }
+    /*
+     * Destructor for the class
+     */
+    function __destruct ( ) {
+        return $this->close ( );
+    }
+    
+    
+    /*
+     * Function to change directory
+     */
+    function change ( $dir ) {
+        return $this->folders ( $dir );
     }
    
-
+    
 }
 
-//include_once 'ftp.php';
-//
-//$ftp = new model ( );
+include_once 'ftp.php';
+
+$ftp = new model ( );
+//$ftp->_construct();
+$dir = ".";
+$fol = $ftp->change($dir);
+print_r($fol);
+$i = 1;
+foreach ( $fol as $key => $val ) {
+    print_r ("Name ".$val);
+}
+//var_dump($fol[$i].name);
+//echo $fol;
+
+
+
 //$ftp_server = "50.63.128.135";
 //$ftp_username = "fredrick-abayie@cs.ashesi.edu.gh";
 //$ftp_password = "16!hEi2As";

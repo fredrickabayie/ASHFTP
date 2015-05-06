@@ -6,10 +6,18 @@
  * description: A root class for all manage classes. This class communicates with DB
  */
 
+define("FTP_SERVER", 'cs.ashesi.edu.gh');
+define("FTP_USERNAME", 'fredrick-abayie@cs.ashesi.edu.gh');
+define("FTP_PASSWORD", '16!hEi2As');
+define("FTP_PORT", 21);
+
+
 /*
  * Ftp class
  */
 class ftp {
+    
+    
     /*
      * Constructor
      */
@@ -22,44 +30,44 @@ class ftp {
     /*
      * Function to connect to server
      */
-    function connect ( $ftp_server ) {
-        $this->conn = ftp_connect ( $ftp_server );
+    function connect ( ) {
+        $this->conn = ftp_connect ( FTP_SERVER );
         if ( $this->conn ) {
-            return $this->conn;
+            if ( ftp_login ( $this->conn , FTP_USERNAME, FTP_PASSWORD ) ) {
+                return $this->conn;                
+            }
+        } else {
+            return false;
         }
-        return null;
     }
     
+    
+    function folders ( $directory ) {
+        
+       if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
+            $items = array ( ); 
 
-    /*
-     * Function to login
-     */
-    function login ( $ftp_username, $ftp_password ) {
-//        $connect = get_connection ();
-        $this->result = ftp_login ( $this->conn , $ftp_username, $ftp_password );
-        if ( $this->result === false ) {
-            echo 'Failed to login';
+            foreach ( $children as $child ) { 
+                
+                $chunks = preg_split ( "/\s+/", $child ); 
+                
+                list($item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
+                        $item['month'], $item['day'], $item['time'], $item['name']) = $chunks; 
+                
+                $item['type'] = $chunks[0]{0} === 'd' ? 'directory' : 'file'; 
+                array_splice($chunks, 0, 8); 
+                $items[implode(" ", $chunks)] = $item; 
+            }
+            return $items; 
         }
-        return $this->result;
     }
     
     
-//    function folders ( $directory = '.' ) {
-//        
-//       if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
-//            $items = array(); 
-//
-//            foreach ($children as $child) { 
-//                $chunks = preg_split("/\s+/", $child); 
-//                list($item['rights'], $item['number'], $item['user'], $item['group'], $item['size'], 
-//                        $item['month'], $item['day'], $item['time']) = $chunks; 
-//                $item['type'] = $chunks[0]{0} === 'd' ? 'directory' : 'file'; 
-//                array_splice($chunks, 0, 8); 
-//                $items[implode(" ", $chunks)] = $item; 
-//            } 
-//
-//            return $items; 
-//        }
-//    }
+    /*
+     * Function to close the FTP connection
+     */
+    function close ( ) {
+        return ftp_close ( $this->conn );
+    }//end of close()
     
 }
