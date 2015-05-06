@@ -31,37 +31,27 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 
 
 function load_folders ( ) {
-    session_start ( );
-    if ( $_SESSION ['username'] ) {
-        require_once '../models/ftp.php';
-//        $object = new ftp ( );
-//        $host = $_SESSION ['host'];
-//        $folder = $object->folders ( );
-//        var_dump($folder);
-//        print_r($folder);
-             $host = $_SESSION['host'];
-        $ftp_server = ftp_connect($host);
-        $username = $_SESSION['username'];
-        $password = $_SESSION['password'];
-        $ftp_login = ftp_login($ftp_server, $username, $password);
+//        require_once '../models/ftp.php';
+        $ftp = new model();
+        $dir = ".";
+        $folder = $ftp->change($dir);        
+        $currentD = $ftp->currentDirectory();
         
-        $folder = ftp_nlist ( $ftp_server, "." );
-//            $items = array ();
-            
         $result =  '{"result":1, "folders": [';
         $i=0;
-        foreach ( $folder as $val ) {
+        foreach ( $folder as $key => $val ) {
             if ( $i != 0 ) {
                 $result .= ',';
             }
-            
-            $result .= '{"folder_name":"'.$val.'"}';
+            $user = substr($folder[$key]['user'], 0, -17 );
+            $result .= '{"name":"'.$folder[$key]['name'].'", "rights":"'.$folder[$key]['rights'].'", '
+                    . '"time":"'.$folder[$key]['time'].'", "user":"'.$user.'", '
+                    . '"group":"'.$folder[$key]['group'].'", "size":"'.$folder[$key]['size'].'", '
+                    . '"day":"'.$folder[$key]['day'].'", "month":"'.$folder[$key]['month'].'", "currentD":"'.$currentD.'"}';
             $i++;
         }
         $result .= ']}';
-//        echo $result;
-//     }
-    }
+        echo $result;
 }
 
 

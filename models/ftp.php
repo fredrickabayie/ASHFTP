@@ -74,6 +74,16 @@ class ftp {
     }
     
     
+    function currentDirectory ( ) {
+        if ( $this->conn ) {
+            return ftp_pwd ( $this->conn );
+        }
+        return false;
+    }
+    
+    
+    
+    
     /*
      * Function to close the FTP connection
      */
