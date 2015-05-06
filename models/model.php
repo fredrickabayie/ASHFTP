@@ -12,18 +12,7 @@ require_once 'ftp.php';
  */
 class model extends ftp
 {
-    
-    /*
-    * Function to sanitize command sent
-    */
-//   function sanitizeString ( $val )
-//   {
-//       $val = stripslashes ( $val );
-//       $val = strip_tags ( $val );
-//       $val = htmlentities ( $val );
-//       return $val;
-//   }//end of sanitizeString()
-    
+        
     /*
      * Constructor for the class
      */
@@ -46,28 +35,32 @@ class model extends ftp
     function change ( $dir ) {
         return $this->folders ( $dir );
     }
+    
+    /*
+    * Function to sanitize command sent
+    */
+   function sanitizeString ( $val )
+   {
+       $val = stripslashes ( $val );
+       $val = strip_tags ( $val );
+       $val = htmlentities ( $val );
+       return $val;
+   }//end of sanitizeString()
    
     
 }
 
-include_once 'ftp.php';
-
-$ftp = new model ( );
-//$ftp->_construct();
-$dir = ".";
-$fol = $ftp->change($dir);
-$name = $ftp->getFolderNames($dir);
-//var_dump($name);
-
-//$folength = count($fol);
+//include_once 'ftp.php';
+//
+//$ftp = new model ( );
+//////$ftp->_construct();
+//$dir = ".";
+//$fol = $ftp->change($dir);
 //print_r($fol);
-//$i = 1;
-
-// foreach ( $name as $n ) {
-foreach ( $fol as $key => $val ) {
-   
-    print_r (" Name ".$fol[$key]['name']. " Rights ".$fol[$key]['rights']);
-}
+//foreach ( $fol as $key => $val ) {
+//   
+//    print_r (" Name ".$fol[$key]['name']. " Rights ".$fol[$key]['rights']);
+//}
     
 //}
 
