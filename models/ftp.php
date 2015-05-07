@@ -54,7 +54,7 @@ class ftp {
     
     
     function folders ( $directory ) {
-        ftp_chdir ( $this->conn, $directory );
+//        ftp_chdir ( $this->conn, $directory );
        if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
             $items = array ( ); 
 
