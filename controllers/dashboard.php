@@ -33,9 +33,10 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 function load_folders ( ) {
 //        require_once '../models/ftp.php';
         $ftp = new model();
-        $dir = ".";
-        $folder = $ftp->change($dir);        
-        $currentD = $ftp->currentDirectory();
+        $dir = "/";
+         $changeD = $ftp->changeDirectory ( $dir );  
+        $folder = $ftp->getFolders ( $dir );        
+//        $currentD = $ftp->currentDirectory();
         
         $result =  '{"result":1, "folders": [';
         $i=0;
@@ -47,7 +48,7 @@ function load_folders ( ) {
             $result .= '{"name":"'.$folder[$key]['name'].'", "rights":"'.$folder[$key]['rights'].'", '
                     . '"time":"'.$folder[$key]['time'].'", "user":"'.$user.'", '
                     . '"group":"'.$folder[$key]['group'].'", "size":"'.$folder[$key]['size'].'", '
-                    . '"day":"'.$folder[$key]['day'].'", "month":"'.$folder[$key]['month'].'", "currentD":"'.$currentD.'"}';
+                    . '"day":"'.$folder[$key]['day'].'", "month":"'.$folder[$key]['month'].'", "currentD":"'.$changeD.'"}';
             $i++;
         }
         $result .= ']}';
@@ -57,27 +58,30 @@ function load_folders ( ) {
 
 
 function change_directory ( ) {
-    if ( isset($_REQUEST['directory'])) {
-        $result = '';
-         session_start ( );
-            $host = $_SESSION['host'];
+//    if ( isset($_REQUEST['directory'])) {
+//        $result = '';
+        $ftp = new model();
             $dir = $_REQUEST['directory'];
-        $ftp_server = ftp_connect($host);
-        $username = $_SESSION['username'];
-        $password = $_SESSION['password'];
-        $ftp_login = ftp_login($ftp_server, $username, $password);
-        ftp_chdir ($ftp_server, $dir); 
-        $dirL = ftp_nlist($ftp_server, ".");
+            
+            $changeD = $ftp->changeDirectory ( $dir );        
+//            $currentD = $ftp->currentDirectory();
+            $folder = $ftp->getFolders($changeD);
+            
          $result =  '{"result":1, "folders": [';
         $i=0;
-        foreach ( $dirL as $x => $val ) {
+        foreach ( $folder as $key => $val ) {
             if ( $i != 0 ) {
                 $result .= ',';
             }
-            $result .= '{"key":"'.$x.'", "folder":"'.$val.'"}';
+            $user = substr($folder[$key]['user'], 0, -17 );
+            
+            $result .= '{"name":"'.$folder[$key]['name'].'", "rights":"'.$folder[$key]['rights'].'", '
+                    . '"time":"'.$folder[$key]['time'].'", "user":"'.$user.'", '
+                    . '"group":"'.$folder[$key]['group'].'", "size":"'.$folder[$key]['size'].'", '
+                    . '"day":"'.$folder[$key]['day'].'", "month":"'.$folder[$key]['month'].'", "currentD":"'.$changeD.'"}';
             $i++;
         }
         $result .= ']}';
-//        echo $result;
-    }
+        echo $result;
+//    }
 }

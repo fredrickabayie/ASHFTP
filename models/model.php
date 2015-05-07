@@ -32,8 +32,13 @@ class model extends ftp
     /*
      * Function to change directory
      */
-    function change ( $dir ) {
+    function getFolders ( $dir ) {
         return $this->folders ( $dir );
+    }
+    
+    
+    function changeDirectory ( $directory ) {
+        return $this->chDir ( $directory );
     }
     
     /*

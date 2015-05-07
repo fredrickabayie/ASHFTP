@@ -43,7 +43,9 @@ function makeRequest ( ) {
              div +=  '</div>';
               div +=          '<div id="obi" class="card-content">';
             div +=              '<span class="card-title activator blue-text text-darken-4">'+object.folders[index].name+'<i class="mdi-navigation-more-vert right"></i></span>';
-            div +=              '<p><a id="'+object.folders[index].name+'" class="btn waves-effect waves-light directory">Open</a></p>';
+//            var yo = "object.folders[index].name";
+//                    var name = '"'+object.folders[index].name+'"';
+            div +=              "<p><a onclick='changeDirectory("+ '"'+object.folders[index].name+'"'+")' class='btn waves-effect waves-light directory'>Open</a></p>";
             div +=            '</div>';
            div +=             '<div class="card-reveal">';
           div +=                '<span class="card-title red-text text-darken-4">Details<i class="mdi-navigation-close right"></i></span>\n\
@@ -57,7 +59,8 @@ function makeRequest ( ) {
             div += '</div>';
             div += '</div>';
         }
-        $("#currentD").text (object.folders[index].currentD );
+//        alert (object.folders[index].name);
+        $("#currentD").text ( object.folders[index].currentD );
         $("#display").html(div);
     }
     else {
@@ -66,19 +69,25 @@ function makeRequest ( ) {
 }//end of makeRequest()
 
 
+function make ( d ) {
+//    $(this).attr("id");
+//    var w = d;
+    console.log(d);
+    alert(d);
+}
+
 //Function to make an ajax request
-//function changeDirectory ( ) {
-$(function ( ) {
-    $(".directory").click( function ( ) {
-    //Initializing variables
-   var divContainer = $ ( this ).parents ( "#display" );
-    var icondelete = $ ( this ).children ( "#obi" );
-    var directory = $ ( this ).attr ( "id" );  
-    console.log ( directory );
+function changeDirectory ( d ) {
+//$(function ( ) {
+//    $(".directory").click( function ( ) {
+  
+//var directory = "";
+//    directory = $ ( this ).attr ( "id" ).val();  
+    console.log ( d );
     var url = "";
     var object = "";
     
-    url = "../controllers/dashboard.php?cmd=2&directory="+directory;
+    url = "../controllers/dashboard.php?cmd=2&directory="+d;
     object = syncAjax ( url );
     var div = "";
     if ( object.result === 1 ) {
@@ -94,7 +103,7 @@ $(function ( ) {
              div +=  '</div>';
               div +=          '<div id="obi" class="card-content">';
             div +=              '<span class="card-title activator blue-text text-darken-4">'+object.folders[index].name+'<i class="mdi-navigation-more-vert right"></i></span>';
-            div +=              '<p><a id="'+object.folders[index].name+'" class="btn waves-effect waves-light directory">Open</a></p>';
+            div +=              "<p><a id='"+object.folders[index].name+"' onclick='changeDirectory("+ '"'+object.folders[index].name+'"'+")' class='btn waves-effect waves-light changedirectory'>Open</a></p>";
             div +=            '</div>';
            div +=             '<div class="card-reveal">';
           div +=                '<span class="card-title red-text text-darken-4">Details<i class="mdi-navigation-close right"></i></span>\n\
@@ -109,11 +118,66 @@ $(function ( ) {
             div += '</div>';
             
         }
+        $("#currentD").text ( object.folders[index].currentD );
         $("#display").html(div);
     }
     else {
     console.log ( "Not connected" );
     }
-      });
-});//end of makeRequest()
+//      });
+}//end of makeRequest()
 
+
+
+
+
+//Function to make an ajax request
+//function changeDirectory ( ) {
+//$(function ( ) {
+//    $(".changedirectory").on("click", function ( ) {
+//   
+//    var directory = "";
+//     directory = $ ( this ).attr ( "id" );  
+//    console.log ( directory );
+//    var url = "";
+//    var object = "";
+//    
+//    url = "../controllers/dashboard.php?cmd=2&directory="+directory;
+//    object = syncAjax ( url );
+//    var div = "";
+//    if ( object.result === 1 ) {
+//        for ( var index in object.folders ) {
+//            div += '<div id="display" class="col s2">';
+//            div += '<div class="card small">';
+//            div += '<div class="card-image waves-effect waves-block waves-light">';
+//            div += '<div><p>\n\
+//                        <input type="checkbox"/>';
+//             div += '<label for="test5"></label>\n\
+//                      </p></div>';
+//             div += '<span class="activator"><i class="mdi-file-folder large"></i></span>';
+//             div +=  '</div>';
+//              div +=          '<div id="obi" class="card-content">';
+//            div +=              '<span class="card-title activator blue-text text-darken-4">'+object.folders[index].name+'<i class="mdi-navigation-more-vert right"></i></span>';
+//            div +=              '<p><a id="'+object.folders[index].name+'" class="btn waves-effect waves-light changedirectory">Open</a></p>';
+//            div +=            '</div>';
+//           div +=             '<div class="card-reveal">';
+//          div +=                '<span class="card-title red-text text-darken-4">Details<i class="mdi-navigation-close right"></i></span>\n\
+//                                <span><a>Size:</a> '+object.folders[index].size+'</span><br/>';
+//                      div +=  '<span><a>Date:</a> '+object.folders[index].day+'/'+object.folders[index].month+'</span><br/>';
+//        div += '<span><a>Time:</a> '+object.folders[index].time+'</span><br/>';
+//        div += '<span><a>User:</a> '+object.folders[index].user+'</span><br/>';
+//        div += '<span><a>Group:</a> '+object.folders[index].group+'</span><br/>';
+//        div += '<span><a>Rights:</a> '+object.folders[index].rights+'</span>';
+//            div += '</div>';
+//            div += '</div>';
+//            div += '</div>';
+//            
+//        }
+//        $("#currentD").text ( object.folders[index].currentD );
+//        $("#display").html(div);
+//    }
+//    else {
+//    console.log ( "Not connected" );
+//    }
+//      });
+//});//end of makeRequest()

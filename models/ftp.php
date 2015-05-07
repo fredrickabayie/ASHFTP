@@ -54,7 +54,7 @@ class ftp {
     
     
     function folders ( $directory ) {
-        
+        ftp_chdir ( $this->conn, $directory );
        if ( is_array ( $children = ftp_rawlist ( $this->conn, $directory ) ) ) { 
             $items = array ( ); 
 
@@ -76,11 +76,17 @@ class ftp {
     
     function currentDirectory ( ) {
         if ( $this->conn ) {
-            return ftp_pwd ( $this->conn );
+            ftp_pwd ( $this->conn );
+            return getcwd();
         }
         return false;
     }
     
+    
+    function chDir ( $directory ) {
+        ftp_chdir ( $this->conn, $directory );
+        return ftp_pwd ( $this->conn );
+    }
     
     
     
