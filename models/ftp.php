@@ -17,11 +17,13 @@ define("FTP_PORT", 21);
  */
 class ftp {
     
+    static $conn;
+    static $result;
     
     /*
      * Constructor
      */
-    function ftp ( ) {
+    function __construct ( ) {
         $this->conn = false;
         $this->result = false;
     }

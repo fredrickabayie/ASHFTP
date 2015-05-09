@@ -17,6 +17,7 @@ class model extends ftp
      * Constructor for the class
      */
     function __construct ( ) {
+//        parent::__construct ( );
         return $this->connect ( );
     }
     
