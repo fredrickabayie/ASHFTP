@@ -18,7 +18,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
          <!--<link href="assets/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
     </head>
-    <body>
+    <body style="background-color: whitesmoke">
         <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="../assets/js/jquery-2.1.3.js"></script>
       <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
@@ -27,7 +27,7 @@ and open the template in the editor.
       
       <div style="background-color: lightgray; padding: 0" class="container-fluid">
           
-          <div class="navbar navbar-inverse">
+          <div style="background-color: #4b4b4b" class="navbar navbar-inverse">
               <!--<div class="navbar navbar-header">-->
               <a class="navbar navbar-brand" href="#"></a>
               <!--</div>-->
@@ -36,12 +36,13 @@ and open the template in the editor.
           
           <div class="container-inner">
               <?php
-                require_once 'index.html';
+                require_once 'loginview.php';
               ?>
           </div>
           
           <div class="navbar navbar-inverse-bottom">
-              
+              <p>©Ashesi University College. All rights reserved.</p>
+              <p>1 University Avenue, Berekuso; PMB CT 3, Cantonments, Accra, Ghana | Phone: +233.302.610.330</p>              
           </div>
           
       </div>
