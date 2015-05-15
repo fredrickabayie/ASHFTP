@@ -6,7 +6,9 @@ and open the template in the editor.
 -->
   <html>
     <head>
-        <title>ashesiFTP</title>
+        <title>ASHFTP</title>
+        
+        <link rel="icon" href="../images/ashftp-02.png" sizes="50x50">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
 
@@ -40,7 +42,7 @@ and open the template in the editor.
               background: #993233;
           }
           
-          .btn:active{
+          .btn:active {
               background: #993233;
           }
           
@@ -88,7 +90,7 @@ and open the template in the editor.
             <!--<p class="z-depth-5"></p>-->
             <div class="card" style="margin:0;padding: 0; border-radius: 4px">
                 <div class="card-content black-text" style="text-align: center; margin: 0; padding: 15px">
-                    <span class="card-title"><img style="width: 96px; height: 76px" src="../images/ashftp-01.png"></span>
+                    <span class="card-title"><img style="width: 96px; height: 76px" src="../images/logo.jpg"></span>
                 <div class="row" style="margin:0;padding: 0">
               
               <!--<form class="col s12" name="login">-->
@@ -120,7 +122,14 @@ and open the template in the editor.
                   
                   <!--<div class="divider" style="background-color: black; width: 20px; height: 20px"></div>-->
                   <!--<div class="input-field col s12">-->
+                 
                     <div class="card-action">
+                        <!--<div class="input-field">-->
+                         <p>
+                             <input type="checkbox" id="test5"/>
+                            <label for="test5">Remember Details</label>
+                          </p>
+                        <!--</div>-->
                         <button id="connect" style="top: 10px" class="btn waves-effect waves-light" type="submit" form="login">
                             Connect
                           <!--<i class="mdi-content-send right"></i>-->
@@ -133,7 +142,7 @@ and open the template in the editor.
                 
                  <div class="divider"></div>
                     <div style="text-align: center; font-size: 11px;  line-height: .8em; padding-top: 8px;">
-                        <a style="padding-bottom: 2px; color: #9e9e9e">Version 1.0.0</a>
+                        <p style="padding-bottom: 2px">Version 1.0.0</p>
                       <p style="padding-top: 2px">©Ashesi University College. All rights reserved.</p>
                     </div>
             <!--</form>-->
