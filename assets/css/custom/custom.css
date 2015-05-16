@@ -28,7 +28,7 @@ and open the template in the editor.
     display: block;
     float: left;
     background-position: center 9px;
-    background-image:url(.../logo.jpg);
+    background-image:url(.../images/logo.jpg);
 }
 
 .navbar-inverse-bottom{

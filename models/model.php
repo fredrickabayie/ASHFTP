@@ -16,17 +16,29 @@ class model extends ftp
     /*
      * Constructor for the class
      */
-    function __construct ( ) {
-//        parent::__construct ( );
-        return $this->connect ( );
+    function __contruct ( ) {
+//        $host = $_SESSION ['host'];
+//        $username = $_SESSION ['username'];
+//        $password = $_SESSION ['password'];
+//        
+//        $this->connect ( $host, $username, $password );
+        return $this->connect($host, $username, $password);
     }
     
     
     /*
      * Destructor for the class
      */
-    function __destruct ( ) {
-        return $this->close ( );
+//    function __destruct ( ) {
+//        return $this->close ( );
+//    }
+    
+    
+    /*
+     * Function to establish connection
+     */
+    function connection ( $server, $username, $password ) {
+        return $this->connect ( $server, $username, $password );
     }
     
     

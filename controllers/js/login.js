@@ -26,12 +26,13 @@ function makeRequest ( username, password, host, port ) {
     var url = "";
     var object = "";
     
-    url = "../controllers/login.php?cmd=1&username="+username+
+    url = "../controllers/php/login.php?cmd=1&username="+username+
             "&password="+password+"&host="+host+"&port="+port;
     object = syncAjax ( url );
     
     if ( object.result === 1 ) {
-        window.location.replace( "../views/dashboard.html" );
+        $(".progress").hide();
+        window.location.replace( "../views/dashboardview.php" );
         $("#result").text ( "Connected" );
         console.log ( "Connectd" );
     }
@@ -57,6 +58,7 @@ $ (function ( ) {
     $ ( "#connect" ).click ( function ( ev ) {
         ev.preventDefault ( );
         getValues ( );
+        $(".progress").show();
         console.log ( "Connect Clicked" );
 //        var username = $ ( "#username" ).val( );
 //        console.log ( getValues( ) );

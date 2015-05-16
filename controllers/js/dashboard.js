@@ -27,7 +27,7 @@ function makeRequest ( ) {
     var url = "";
     var object = "";
     
-    url = "../controllers/dashboard.php?cmd=1";
+    url = "../controllers/php/dashboard.php?cmd=1";
     object = syncAjax ( url );
     var div = "";
     if ( object.result === 1 ) {
@@ -87,7 +87,7 @@ function changeDirectory ( d ) {
     var url = "";
     var object = "";
     
-    url = "../controllers/dashboard.php?cmd=2&directory="+d;
+    url = "../controllers/php/dashboard.php?cmd=2&directory="+d;
     object = syncAjax ( url );
     var div = "";
     if ( object.result === 1 ) {

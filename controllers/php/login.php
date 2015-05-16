@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once '../models/model.php';
+require_once '../../models/model.php';
 
 if ( filter_input ( INPUT_GET, 'cmd' ) ) {
     $model = new model();
@@ -29,22 +29,17 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 function establish_connection ( ) {
     if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
             filter_input ( INPUT_GET, 'host' ) ) {
-        require_once '../models/ftp.php';
-        $object = new ftp ( );
+        require_once '../../models/model.php';
         $model = new model ( );
         $username = $model->sanitizeString ( filter_input ( INPUT_GET, 'username' ) );
         $password = $model->sanitizeString ( filter_input ( INPUT_GET, 'password' ) );
         $host = $model->sanitizeString ( filter_input ( INPUT_GET, 'host' ) );
 //        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
         
-        if ( $object->connect ( $host ) ) {
-            if ( $object->login ( $username, $password ) ) {
+        if ( $model->connection ( $host, $username, $password ) ) {
                 sessions ( $host, $username, $password );
                 echo '{"result":1, "message":"Connected to server"}';                
-            } else {
-                echo '{"result":0, "message":"Failed to connect to server"}';
             }
-        }
     } else {
         echo '{"result":0, "message":"Variables not set"}';
     }

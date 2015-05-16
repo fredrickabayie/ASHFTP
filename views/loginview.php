@@ -10,7 +10,7 @@ and open the template in the editor.
         
         <link rel="icon" href="../images/ashftp-02.png" sizes="50x50">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../assets/css/materialize/materialize.min.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -18,9 +18,9 @@ and open the template in the editor.
 
     <body>
       <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="../assets/js/jquery-2.1.3.js"></script>
-      <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
-      <script type="text/javascript" src="../controllers/login.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery/jquery-2.1.3.js"></script>
+      <script type="text/javascript" src="../assets/js/materialize/materialize.min.js"></script>
+      <script type="text/javascript" src="../controllers/js/login.js"></script>
       
       <style type="text/css">
           body {
@@ -29,7 +29,7 @@ and open the template in the editor.
               /*background: #aa9c77;*/
               background: #4b4b4b;
               font-size: 12px; 
-              /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+              font-family: Verdana, Arial, Helvetica, sans-serif;
               /*text-align: center*/
           }
           
@@ -42,11 +42,7 @@ and open the template in the editor.
               background: #993233;
           }
           
-          .btn:active {
-              background: #993233;
-          }
-          
-          .btn:visited {
+          .btn:focus {
               background: #993233;
           }
           
@@ -141,10 +137,14 @@ and open the template in the editor.
               </div>
                 
                  <div class="divider"></div>
+                 <div style="margin:0px;padding:0; height: 2px; background: transparent; display: none" class="progress">
+                     <div style="color:  #993233; background-color:  #993233" class="indeterminate"></div>
+                </div>
                     <div style="text-align: center; font-size: 11px;  line-height: .8em; padding-top: 8px;">
                         <p style="padding-bottom: 2px">Version 1.0.0</p>
                       <p style="padding-top: 2px">©Ashesi University College. All rights reserved.</p>
                     </div>
+                 
             <!--</form>-->
               
           </div>
@@ -162,7 +162,13 @@ and open the template in the editor.
           
       </div>
       
-  
+<!--      <script type="text/javascript">
+          $(function (){
+              $("#connect").click( function (){
+                $(".progress").show();
+              });
+          });
+      </script>-->
       
     </body>
   </html>

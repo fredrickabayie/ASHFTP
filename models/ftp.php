@@ -32,10 +32,10 @@ class ftp {
     /*
      * Function to connect to server
      */
-    function connect ( ) {
-        $this->conn = ftp_connect ( FTP_SERVER );
+    function connect ( $host, $username, $password ) {
+        $this->conn = ftp_connect ( $host );
         if ( $this->conn ) {
-            if ( ftp_login ( $this->conn , FTP_USERNAME, FTP_PASSWORD ) ) {
+            if ( ftp_login ( $this->conn , $username, $password ) ) {
                 return $this->conn;                
             }
         } else {
