@@ -137,9 +137,11 @@ and open the template in the editor.
               </div>
                 
                  <div class="divider"></div>
+                 
                  <div style="margin:0px;padding:0; height: 2px; background: transparent; display: none" class="progress">
                      <div style="color:  #993233; background-color:  #993233" class="indeterminate"></div>
                 </div>
+                 
                     <div style="text-align: center; font-size: 11px;  line-height: .8em; padding-top: 8px;">
                         <p style="padding-bottom: 2px">Version 1.0.0</p>
                       <p style="padding-top: 2px">©Ashesi University College. All rights reserved.</p>

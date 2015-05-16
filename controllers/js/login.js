@@ -37,7 +37,8 @@ function makeRequest ( username, password, host, port ) {
         console.log ( "Connectd" );
     }
     else {
-    console.log ( "Not connected" );
+        $(".progress").hide();
+        console.log ( "Not connected" );
     }
 }//end of makeRequest()
 
