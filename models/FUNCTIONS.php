@@ -20,11 +20,18 @@ class FUNCTIONS {
      * @param type $str
      * @return type
      */
+//    public function sanitize_strings ( $str ) {
+//        $stripslashes = stripslashes ( $str );
+//        $strip_tags = strip_tags ( $stripslashes );
+//        $htmlentites = htmlentities ( $strip_tags );
+//        return $htmlentites;
+//    }//end of sanitize_strings($str);
+    
     public function sanitize_strings ( $str ) {
-        $stripslashes = stripslashes ( $str );
-        $strip_tags = strip_tags ( $stripslashes );
-        $htmlentites = htmlentities ( $strip_tags );
-        return $htmlentites;
+        $str = stripslashes ( $str );
+        $str = strip_tags ( $str );
+        $str = htmlentities ( $str );
+        return $str;
     }//end of sanitize_strings($str);
     
 }//end of FUNCTIONS

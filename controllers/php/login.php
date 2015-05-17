@@ -42,10 +42,10 @@ function connect ( ) {
         
         if ( $ftp->connection ( $host, $username, $password ) ) {
 //                sessions ( $host, $username, $password );
-                return '{"result":1, "message":"Connected to server"}';                
+                echo '{"result":1, "message":"Connected to server"}';                
             }
     } else {
-        return '{"result":0, "message":"Variables not set"}';
+        echo '{"result":0, "message":"Variables not set"}';
     }
 }//end of establish_connection()
 

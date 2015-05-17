@@ -28,6 +28,13 @@ class FTP extends FTPCLIENT {
     
     /**
      * 
+     */
+    public function __destruct ( ) {
+        parent::__destruct ( );
+    }
+    
+    /**
+     * 
      * @param type $host
      * @param type $username
      * @param type $password
@@ -37,7 +44,7 @@ class FTP extends FTPCLIENT {
         return $this->establish_connection ( $host, $username, $password );
     }
     
-    public function functionName($param) {
-        
+    public function display_directory_files ( $directory ) {
+        return ;
     }
 }
