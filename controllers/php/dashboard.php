@@ -6,11 +6,11 @@
  * and open the template in the editor.
  */
 
-require_once '../models/model.php';
+require_once '../../models/FUNCTIONS.php';
 
 if ( filter_input ( INPUT_GET, 'cmd' ) ) {
-    $model = new model();
-    $cmd = $model->sanitizeString ( filter_input ( INPUT_GET, 'cmd' ) );
+    $function = new FUNCTIONS ( );
+    $cmd = $function->sanitize_strings ( filter_input ( INPUT_GET, 'cmd' ) );
     
     switch ($cmd) {
         case 1:

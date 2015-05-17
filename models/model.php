@@ -10,20 +10,22 @@ require_once 'ftp.php';
 /*
  * Class model and extends the ftp class
  */
-class model extends ftp
+Class model extends ftp
 {
         
     /*
      * Constructor for the class
      */
-    function __contruct ( ) {
+    function __construct ( ) {
+//         return $this->connect ( $host, $username, $password );
+//        session_start();
 //        $host = $_SESSION ['host'];
 //        $username = $_SESSION ['username'];
 //        $password = $_SESSION ['password'];
-//        
-//        $this->connect ( $host, $username, $password );
-        return $this->connect($host, $username, $password);
-    }
+//
+//        return $this->connect($host, $username, $password);
+        parent::__construct();
+        }
     
     
     /*
@@ -37,8 +39,8 @@ class model extends ftp
     /*
      * Function to establish connection
      */
-    function connection ( $server, $username, $password ) {
-        return $this->connect ( $server, $username, $password );
+    function connection ( $host, $username, $password ) {
+        return $this->connect ( $host, $username, $password );
     }
     
     
