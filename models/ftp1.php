@@ -1,4 +1,4 @@
-<?php
+<?php //
 
 /**
  * author:
@@ -25,7 +25,7 @@ class ftp {
     /*
      * Constructor
      */
-    function __construct ( ) {
+    public function __construct ( ) {
         $this->ftp_stream = false;
         $this->result = false;
     }

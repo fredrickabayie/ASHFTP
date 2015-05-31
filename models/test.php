@@ -5,13 +5,17 @@
  * and open the template in the editor.
  */
 
-include_once 'ftp.php';
+require_once 'test2.php';
 
-$ftp = new ftp ( );
+//$test2 = new FTPCLIENT ( );
 
-session_start();
- $ftp_conn = $_SESSION['conn'];
- echo $ftp_conn;
-
-$ftp_folder = $ftp->folders();
-print_r ($ftp_folder);
+//session_start();
+// $test2 = $_SESSION['test'];
+// echo $ftp_conn;
+function display(){
+$test2 = $_SESSION['test'];
+$files = $test2->directory_files ( );
+//print_r($files);
+var_dump($files);
+}
+display ( );

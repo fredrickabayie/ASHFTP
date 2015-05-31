@@ -11,7 +11,7 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
     $function = new FUNCTIONS ( );
     $cmd = $function->sanitize_strings ( filter_input ( INPUT_GET, 'cmd' ) );
     
-    switch ($cmd) {
+    switch ( $cmd ) {
         case 1:
             connect ( );
             break;
@@ -29,19 +29,20 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 function connect ( ) {
     if ( filter_input ( INPUT_GET, 'username' ) && filter_input ( INPUT_GET, 'password' ) &&
             filter_input ( INPUT_GET, 'host' ) ) {
-        require_once '../../models/FTP.php';
+        session_start ( );
+        require_once '../../models/FTPCLIENT.php';
         require_once '../../models/FUNCTIONS.php';
         
         $function = new FUNCTIONS ( );
-        $ftp = new FTP ( );
+        $ftp = new FTPCLIENT ( );     
         
         $username = $function->sanitize_strings ( filter_input ( INPUT_GET, 'username' ) );
         $password = $function->sanitize_strings ( filter_input ( INPUT_GET, 'password' ) );
         $host = $function->sanitize_strings ( filter_input ( INPUT_GET, 'host' ) );
 //        $port = $model->sanitizeString ( filter_input ( INPUT_GET, 'port' ) );
         
-        if ( $ftp->connection ( $host, $username, $password ) ) {
-//                sessions ( $host, $username, $password );
+        if ( $ftp->establish_connection ( $host, $username, $password ) ) {
+               $_SESSION['ftp_stream'] = $ftp;
                 echo '{"result":1, "message":"Connected to server"}';                
             }
     } else {

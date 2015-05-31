@@ -12,7 +12,7 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
     $function = new FUNCTIONS ( );
     $cmd = $function->sanitize_strings ( filter_input ( INPUT_GET, 'cmd' ) );
     
-    switch ($cmd) {
+    switch ( $cmd ) {
         case 1:
             load_folders ( );
             break;
@@ -20,10 +20,6 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
         case 2:
             change_directory ( );
             break;
-        
-//        case 3:
-//            changed_directory ( );
-//            break;
 
         default:
             echo '{"result":0, "message": "Invalid Command Entered"}';
@@ -35,13 +31,13 @@ if ( filter_input ( INPUT_GET, 'cmd' ) ) {
 
 
 function load_folders ( ) {
-//        require_once '../models/ftp.php';
-        $ftp = new model();
-        $dir = "/";
-         $changeD = $ftp->changeDirectory ( $dir );  
-        $folder = $ftp->getFolders ( $dir );        
-//        $currentD = $ftp->currentDirectory();
-        
+//        require_once '../../models/FTPCLIENT.php';
+        require_once 'login.php';
+
+        $ftp = $_SESSION['ftp_stream'];
+        $changeD = "/";
+        $folder = $ftp->directory_files ( );        
+     
         $result =  '{"result":1, "folders": [';
         $i=0;
         foreach ( $folder as $key => $val ) {

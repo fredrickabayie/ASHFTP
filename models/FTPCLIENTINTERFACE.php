@@ -11,7 +11,7 @@
  * @author fredrick.abayie
  */
 interface FTPCLIENTINTERFACE {
-    //put your code here
+    
     
     /**
      * Constructor for FTPCLIENTINTERFACE
@@ -23,7 +23,7 @@ interface FTPCLIENTINTERFACE {
     /**
      * Destructor for FTPCLIENTINTERFACE
      */
-    public function __destruct ( );
+//    public function __destruct ( );
     //end of __destruct
 
     
@@ -33,8 +33,16 @@ interface FTPCLIENTINTERFACE {
      * @param String $username FTP username
      * @param String $password FTP password
      */
-    public function establish_connection ( $host, $username, $password );
+    public function establish_connection ( $host, $username, $password, $port = 21 );
     //end of establish_connection($host, $username, $password);
+    
+    
+   /**
+     * Function to display list of files in a directory
+     * @param String $directory The directory to load files
+     */
+    public function directory_files ( $directory );
+    //end of directory_files($directory);
     
     
 }

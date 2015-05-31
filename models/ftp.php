@@ -29,9 +29,9 @@ class FTP extends FTPCLIENT {
     /**
      * 
      */
-    public function __destruct ( ) {
-        parent::__destruct ( );
-    }
+//    public function __destruct ( ) {
+//        parent::__destruct ( );
+//    }
     
     /**
      * 
@@ -44,7 +44,8 @@ class FTP extends FTPCLIENT {
         return $this->establish_connection ( $host, $username, $password );
     }
     
+    
     public function display_directory_files ( $directory ) {
-        return ;
+        return $this->directory_files ( $directory );
     }
 }
